@@ -2,28 +2,13 @@
   <form>
     <h1 class="h3 mb-3 fw-normal">TODO List</h1>
 
-    <div class="row">
-      <div class="col">
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="finished"> Finished
-          </label>
-        </div>
+    <div class="input-group mb-3">
+      <div class="input-group-text">
+        <input class="form-check-input mt-0" type="checkbox" value="finished" aria-label="Finished">
       </div>
-
-      <div class="col">
-        <div class="form-floating">
-          <input type="text" class="form-control" id="something-to-do" placeholder="Something to do">
-          <label for="something-to-do">Something to do</label>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="form-floating">
-          <input type="date" class="form-control" id="something-at" placeholder="01/01/2021">
-          <label for="something-at">Date to do</label>
-        </div>
-      </div>
+      <input type="text" class="form-control" id="something-to-do" placeholder="Something to do" aria-label="Something to do">
+      <span class="input-group-text">-</span>
+      <input type="date" class="form-control" id="something-at" placeholder="Date to do" aria-label="Date to do">
     </div>
 
     <button class="w-100 btn btn-lg btn-primary" type="submit">Add TODO</button>
