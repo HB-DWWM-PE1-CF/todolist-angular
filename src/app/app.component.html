@@ -1,22 +1,21 @@
 <div class="mt-5 d-flex align-center justify-content-center w-100">
   <form>
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 fw-normal">TODO List</h1>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="something-to-do" placeholder="Something to do">
+      <label for="something-to-do">Something to do</label>
+    </div>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
+      <input type="date" class="form-control" id="something-at" placeholder="01/01/2021">
+      <label for="something-at">Date to do</label>
     </div>
 
     <div class="checkbox mb-3">
       <label>
-        <input type="checkbox" value="remember-me"> Remember me
+        <input type="checkbox" value="finished"> Finished
       </label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-    <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Add TODO</button>
   </form>
 </div>
