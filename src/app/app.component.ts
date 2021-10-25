@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'todolist-angular';
+  public todoList: Array<string> = [
+    'foo',
+    'bar',
+    'bar',
+    'bar',
+    'bar',
+  ];
 }

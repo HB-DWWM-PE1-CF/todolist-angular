@@ -2,7 +2,7 @@
   <form>
     <h1 class="h3 mb-3 fw-normal">TODO List</h1>
 
-    <div class="input-group mb-3">
+    <div *ngFor="let todo of todoList" class="input-group mb-3">
       <div class="input-group-text">
         <input class="form-check-input mt-0" type="checkbox" value="finished" aria-label="Finished">
       </div>
