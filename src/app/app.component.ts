@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Todo} from '../models/todo';
 import {AbstractControl, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {formatDate} from '@angular/common';
+import {TodoListService} from './services/todo-list.service';
 
 @Component({
   selector: 'app-root',
@@ -10,21 +11,6 @@ import {formatDate} from '@angular/common';
 })
 export class AppComponent implements OnInit {
   title = 'todolist-angular';
-  public todoList: Array<Todo> = [
-    {
-      label: 'foo',
-      at: new Date(),
-      finished: true,
-    }, {
-      label: 'bar',
-      at: new Date(),
-      finished: false,
-    }, {
-      label: 'foobar',
-      at: new Date(),
-      finished: true,
-    }
-  ];
 
   // new FormArray();
   public form = this.fb.array([]);
@@ -34,7 +20,16 @@ export class AppComponent implements OnInit {
    */
   public constructor(
     private fb: FormBuilder,
+    private todoListService: TodoListService,
   ) {
+  }
+
+  public get todoList(): Array<Todo> {
+    return this.todoListService.todoList;
+  }
+
+  public set todoList(todoList: Array<Todo>) {
+    this.todoListService.todoList = todoList;
   }
 
   /**
