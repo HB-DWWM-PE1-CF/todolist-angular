@@ -28,11 +28,17 @@ export class AppComponent implements OnInit {
   // new FormArray();
   public form = this.fb.array([]);
 
+  /**
+   * Inject Angular's FormBuilder in our component.
+   */
   public constructor(
     private fb: FormBuilder,
   ) {
   }
 
+  /**
+   * Call at component initialization. Use to prepare and set value in the form from todoList data source.
+   */
   public ngOnInit(): void {
     for (let i = 0; i < this.todoList.length; i++) {
       this.addTodo();
@@ -41,6 +47,9 @@ export class AppComponent implements OnInit {
     this.form.setValue(this.todoList);
   }
 
+  /**
+   * Add a new form for To do in formArray.
+   */
   public addTodo(): void {
     this.form.push(
       // new FormGroup();
@@ -55,13 +64,19 @@ export class AppComponent implements OnInit {
     );
   }
 
+  /**
+   * Generic method to be use with all keys inside a FormGroup.
+   */
   public getControl(formGroup: AbstractControl, key: string): FormControl
   {
+    // We cannot set the type of the first argument as FormGroup (in template, we get AbstractControl).
+    // Check if the method's first argument is of type FormGroup.
     if (!(formGroup instanceof FormGroup)) {
       throw new Error('Form given as first argument is not an instance of FormGroup');
     }
 
     const fc = formGroup.get(key);
+    // Check if the field retrieve by given key is an instance of FormControl.
     if (!(fc instanceof FormControl)) {
       throw new Error('Form retrieve is not an instance of FormControl');
     }
@@ -69,6 +84,7 @@ export class AppComponent implements OnInit {
     return fc;
   }
 
+  // In our case, this function do the same result as the one use above. (But without strict type checking, because no instanceof).
   // public getControl(formGroup: AbstractControl, key: string): FormControl
   // {
   //   return (formGroup as FormGroup).get(key) as FormControl;

@@ -12,6 +12,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    // Both FormsModule and ReactiveFormsModule are needed if you want to use Reactive forms.
     FormsModule,
     ReactiveFormsModule,
   ],
