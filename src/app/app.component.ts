@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Todo} from '../models/todo';
 import {AbstractControl, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -44,7 +45,25 @@ export class AppComponent implements OnInit {
       this.addTodo();
     }
 
-    this.form.setValue(this.todoList);
+    this.form.setValue(this.todoList.map((todo: Todo) => {
+      return {
+          label: todo.label,
+          at: formatDate(todo.at, 'YYYY-MM-dd', 'en'),
+          finished: todo.finished,
+        };
+    }));
+
+    // This code bellow do the same as above.
+    // const arrTmp = [];
+    // for (const todo of this.todoList) {
+    //   const formTodo = {
+    //     label: todo.label,
+    //     at: formatDate(todo.at, 'YYYY-MM-dd', 'en'),
+    //     finished: todo.finished,
+    //   };
+    //   arrTmp.push(formTodo);
+    // }
+    // this.form.setValue(arrTmp);
   }
 
   /**
