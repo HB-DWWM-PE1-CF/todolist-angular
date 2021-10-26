@@ -70,13 +70,16 @@ export class AppComponent implements OnInit {
    * Add a new form for To do in formArray.
    */
   public addTodo(): void {
+    const d = new Date();
+    d.setDate(d.getDate() + 7);
+
     this.form.push(
       // new FormGroup();
       this.fb.group({
         // new FormControl();
         label: [''],
         // new FormControl();
-        at: [new Date()],
+        at: [formatDate(d, 'YYYY-MM-dd', 'en')],
         // new FormControl();
         finished: [false],
       })

@@ -11,6 +11,6 @@
       <input [formControl]="getControl(todo, 'at')" type="date" class="form-control" id="something-at" placeholder="Date to do" aria-label="Date to do">
     </div>
 
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Add TODO</button>
+    <button (click)="addTodo()" class="w-100 btn btn-lg btn-primary" type="submit">Add TODO</button>
   </form>
 </div>
