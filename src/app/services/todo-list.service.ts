@@ -5,22 +5,30 @@ import {Todo} from '../../models/todo';
   providedIn: 'root'
 })
 export class TodoListService {
+  private static STORAGE_KEY = '__TODO_LIST__';
 
-  public todoList: Array<Todo> = [
-    {
-      label: 'foo',
-      at: new Date(),
-      finished: true,
-    }, {
-      label: 'bar',
-      at: new Date(),
-      finished: false,
-    }, {
-      label: 'foobar',
-      at: new Date(),
-      finished: true,
-    }
-  ];
+  private todoListInternal: Array<Todo>|null = null;
 
   constructor() { }
+
+  public get todoList(): Array<Todo> {
+    if (this.todoListInternal === null) {
+      const todoListString = localStorage.getItem(TodoListService.STORAGE_KEY);
+
+      if (todoListString === null) {
+        this.todoListInternal = [];
+      } else {
+        this.todoListInternal = JSON.parse(todoListString);
+      }
+    }
+
+    // Load from localStorage on first call.
+    return this.todoListInternal ?? [];
+  }
+
+  public set todoList(val: Array<Todo>) {
+    this.todoListInternal = val;
+
+    localStorage.setItem(TodoListService.STORAGE_KEY, JSON.stringify(this.todoListInternal));
+  }
 }
