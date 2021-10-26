@@ -1,5 +1,5 @@
 <div class="mt-5 d-flex align-center justify-content-center w-100">
-  <form>
+  <form (submit)="submit()">
     <h1 class="h3 mb-3 fw-normal">TODO List</h1>
 
     <div *ngFor="let todo of form.controls; let i = index" class="input-group mb-3">
@@ -12,6 +12,7 @@
       <button (click)="removeTodo(i)" class="btn btn-danger" type="button">x</button>
     </div>
 
-    <button (click)="addTodo()" class="w-100 btn btn-lg btn-primary" type="submit">Add TODO</button>
+    <button (click)="addTodo()" class="w-100 btn btn-lg btn-primary" type="button">Add TODO</button>
+    <button class="w-100 btn btn-lg btn-success" type="submit">Save</button>
   </form>
 </div>

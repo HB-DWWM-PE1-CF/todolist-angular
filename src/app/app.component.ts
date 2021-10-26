@@ -115,4 +115,14 @@ export class AppComponent implements OnInit {
   // {
   //   return (formGroup as FormGroup).get(key) as FormControl;
   // }
+
+  public submit(): void {
+    this.todoList = this.form.value.map((val: {label: string, at: string, finished: boolean}) => {
+      return {
+        label: val.label,
+        at: new Date(val.at),
+        finished: val.finished,
+      };
+    });
+  }
 }
