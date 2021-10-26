@@ -86,6 +86,10 @@ export class AppComponent implements OnInit {
     );
   }
 
+  public removeTodo(index: number): void {
+    this.form.removeAt(index);
+  }
+
   /**
    * Generic method to be use with all keys inside a FormGroup.
    */

@@ -2,13 +2,14 @@
   <form>
     <h1 class="h3 mb-3 fw-normal">TODO List</h1>
 
-    <div *ngFor="let todo of form.controls" class="input-group mb-3">
+    <div *ngFor="let todo of form.controls; let i = index" class="input-group mb-3">
       <div class="input-group-text">
         <input [formControl]="getControl(todo, 'finished')" class="form-check-input mt-0" type="checkbox" value="finished" aria-label="Finished">
       </div>
       <input [formControl]="getControl(todo, 'label')" type="text" class="form-control" id="something-to-do" placeholder="Something to do" aria-label="Something to do">
       <span class="input-group-text">-</span>
       <input [formControl]="getControl(todo, 'at')" type="date" class="form-control" id="something-at" placeholder="Date to do" aria-label="Date to do">
+      <button (click)="removeTodo(i)" class="btn btn-danger" type="button">x</button>
     </div>
 
     <button (click)="addTodo()" class="w-100 btn btn-lg btn-primary" type="submit">Add TODO</button>
