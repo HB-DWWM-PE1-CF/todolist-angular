@@ -24,41 +24,35 @@ export class AppComponent implements OnInit {
   ) {
   }
 
-  public get todoList(): Array<Todo> {
-    return this.todoListService.todoList;
-  }
-
-  public set todoList(todoList: Array<Todo>) {
-    this.todoListService.todoList = todoList;
-  }
-
   /**
    * Call at component initialization. Use to prepare and set value in the form from todoList data source.
    */
   public ngOnInit(): void {
-    for (let i = 0; i < this.todoList.length; i++) {
-      this.addTodo();
-    }
+    this.todoListService.todoList.subscribe((data: Array<Todo>) => {
+      for (let i = 0; i < data.length; i++) {
+        this.addTodo();
+      }
 
-    this.form.setValue(this.todoList.map((todo: Todo) => {
-      return {
+      this.form.setValue(data.map((todo: Todo) => {
+        return {
           label: todo.label,
           at: formatDate(todo.at, 'YYYY-MM-dd', 'en'),
           finished: todo.finished,
         };
-    }));
+      }));
 
-    // This code bellow do the same as above.
-    // const arrTmp = [];
-    // for (const todo of this.todoList) {
-    //   const formTodo = {
-    //     label: todo.label,
-    //     at: formatDate(todo.at, 'YYYY-MM-dd', 'en'),
-    //     finished: todo.finished,
-    //   };
-    //   arrTmp.push(formTodo);
-    // }
-    // this.form.setValue(arrTmp);
+      // This code bellow do the same as above.
+      // const arrTmp = [];
+      // for (const todo of this.todoList) {
+      //   const formTodo = {
+      //     label: todo.label,
+      //     at: formatDate(todo.at, 'YYYY-MM-dd', 'en'),
+      //     finished: todo.finished,
+      //   };
+      //   arrTmp.push(formTodo);
+      // }
+      // this.form.setValue(arrTmp);
+    });
   }
 
   /**
@@ -112,12 +106,16 @@ export class AppComponent implements OnInit {
   // }
 
   public submit(): void {
-    this.todoList = this.form.value.map((val: {label: string, at: string, finished: boolean}) => {
-      return {
-        label: val.label,
-        at: new Date(val.at),
-        finished: val.finished,
-      };
-    });
+    // this.todoList = this.form.value.map((val: {label: string, at: string, finished: boolean}) => {
+    //   return {
+    //     label: val.label,
+    //     at: new Date(val.at),
+    //     finished: val.finished,
+    //   };
+    // });
+  }
+
+  saveTodo(todo: AbstractControl): void {
+    this.todoListService.createTodo(todo.value);
   }
 }

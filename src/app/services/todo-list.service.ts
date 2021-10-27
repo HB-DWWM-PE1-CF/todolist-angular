@@ -1,34 +1,37 @@
 import { Injectable } from '@angular/core';
 import {Todo} from '../../models/todo';
+import {HttpClient} from '@angular/common/http';
+import {from, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoListService {
-  private static STORAGE_KEY = '__TODO_LIST__';
-
   private todoListInternal: Array<Todo>|null = null;
 
-  constructor() { }
-
-  public get todoList(): Array<Todo> {
-    if (this.todoListInternal === null) {
-      const todoListString = localStorage.getItem(TodoListService.STORAGE_KEY);
-
-      if (todoListString === null) {
-        this.todoListInternal = [];
-      } else {
-        this.todoListInternal = JSON.parse(todoListString);
-      }
-    }
-
-    // Load from localStorage on first call.
-    return this.todoListInternal ?? [];
+  constructor(
+    private httpClient: HttpClient,
+  ) {
   }
 
-  public set todoList(val: Array<Todo>) {
-    this.todoListInternal = val;
+  public get todoList(): Observable<Array<Todo>> {
+    if (this.todoListInternal === null) {
+      return this.httpClient.get<Array<Todo>>('https://192.168.215.76:8000/api/todos');
+    }
 
-    localStorage.setItem(TodoListService.STORAGE_KEY, JSON.stringify(this.todoListInternal));
+    return from([]);
+  }
+
+  // public set todoList(val: Array<Todo>) {
+  //   this.todoListInternal = val;
+  //
+  //   localStorage.setItem(TodoListService.STORAGE_KEY, JSON.stringify(this.todoListInternal));
+  // }
+
+  public createTodo(todo: Todo): void {
+    this.httpClient.post('https://192.168.215.76:8000/api/todos', todo)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }
