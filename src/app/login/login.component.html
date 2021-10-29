@@ -1,0 +1,9 @@
+<div *ngIf="!isLogged">
+  <form [formGroup]="form" (submit)="submit()" class="input-group mb-3">
+    <input formControlName="email" type="text" class="form-control" placeholder="email" aria-label="email@domain.fr">
+    <input formControlName="password" type="password" class="form-control" placeholder="Password" aria-label="Server">
+    <button class="btn btn-success" type="submit">
+      Log in
+    </button>
+  </form>
+</div>

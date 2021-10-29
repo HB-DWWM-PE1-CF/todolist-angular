@@ -1,0 +1,26 @@
+<form *ngIf="isLogged" (submit)="submit()" class="mb-3">
+  <div class="text-center m-3">
+    <button class="btn btn-outline-danger" type="button" (click)="logout()">
+      Logout
+    </button>
+  </div>
+
+  <div *ngFor="let todo of form.controls; let i = index" class="input-group mb-3">
+    <div class="input-group-text">
+      <input [formControl]="getControl(todo, 'finished')" class="form-check-input mt-0" type="checkbox" value="finished" aria-label="Finished">
+    </div>
+    <input [formControl]="getControl(todo, 'label')" type="text" class="form-control" id="something-to-do" placeholder="Something to do" aria-label="Something to do">
+    <span class="input-group-text">-</span>
+    <input [formControl]="getControl(todo, 'at')" type="date" class="form-control" id="something-at" placeholder="Date to do" aria-label="Date to do">
+    <button (click)="removeTodo(i)" class="btn btn-danger" type="button">x</button>
+    <button (click)="saveTodo(todo)" class="btn btn-success" type="button">S</button>
+  </div>
+
+  <button (click)="addTodo()" class="w-100 btn btn-lg btn-primary" type="button">Add TODO</button>
+</form>
+
+<div *ngIf="!isLogged" class="text-center">
+  <a routerLink="/login" class="btn btn-link m-3">
+    Login
+  </a>
+</div>
